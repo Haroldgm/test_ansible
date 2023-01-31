@@ -1,0 +1,21 @@
+ansible dev -m ansible.builtin.setup | grep ansible_distribution
+        "ansible_distribution": "SLES",
+        "ansible_distribution_file_parsed": true,
+        "ansible_distribution_file_path": "/etc/os-release",
+        "ansible_distribution_file_variety": "SUSE",
+        "ansible_distribution_major_version": "15",
+        "ansible_distribution_release": "3",
+        "ansible_distribution_version": "15.3",
+        "ansible_distribution": "SLES",
+        "ansible_distribution_file_parsed": true,
+        "ansible_distribution_file_path": "/etc/os-release",
+        "ansible_distribution_file_variety": "SUSE",
+        "ansible_distribution_major_version": "15",
+        "ansible_distribution_release": "3",
+        "ansible_distribution_version": "15.3",
+
+
+haroldgm@Controller:/home/haroldgm/test_ansible> ansible dev -m ansible.builtin.setup | grep ansible_hostname
+        "ansible_hostname": "Remote2",
+        "ansible_hostname": "Remote1",
+haroldgm@Controller:/home/haroldgm/test_ansible> 
