@@ -6,4 +6,4 @@
    - name: Check the status of vsftpd service
      service:
       name: vsftpd
-      state: start
+      state: started
