@@ -1,0 +1,12 @@
+#install tree package
+ansible -m command -a "zypper search -i tree" dev
+ansible -m zypper -a "name=tree state=present" dev
+
+
+#uninstall tree package
+ansible -m command -a "zypper search -i tree" dev
+ansible -m zypper -a "name=tree state=present" dev
+
+Note:
+Ensure python 3.6 is the default interpreter else you will encounter the problem below:
+https://www.tecmint.com/fix-shared-connection-to-x-x-xx-closed-ansible-error/
