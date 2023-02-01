@@ -1,0 +1,17 @@
+Ansible modules
+Ansible modules are units of code that can control system resources or execute system commands. 
+Ansible provides a module library that you can execute directly on remote hosts or through playbooks.
+
+Enabling modules
+You can enable a custom module by dropping it into one of these locations:
+
+any directory added to the ANSIBLE_LIBRARY environment variable ($ANSIBLE_LIBRARY takes a colon-separated list like $PATH)
+
+~/.ansible/plugins/modules/
+
+/usr/share/ansible/plugins/modules/
+
+Further reading:
+https://docs.ansible.com/ansible/latest/module_plugin_guide/index.html
+https://docs.ansible.com/ansible/latest/plugins/plugins.html
+https://docs.ansible.com/ansible/latest/plugins/module.html
