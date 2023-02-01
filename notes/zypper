@@ -5,7 +5,7 @@ ansible -m zypper -a "name=tree state=present" dev
 
 #uninstall tree package
 ansible -m command -a "zypper search -i tree" dev
-ansible -m zypper -a "name=tree state=present" dev
+ansible -m zypper -a "name=tree state=absent" dev
 
 Note:
 Ensure python 3.6 is the default interpreter else you will encounter the problem below:
