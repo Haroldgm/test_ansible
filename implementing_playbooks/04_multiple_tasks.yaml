@@ -1,0 +1,39 @@
+---
+- hosts: dev
+  become: true
+  become_user: root
+  tasks:
+    - name: Install Nginx
+      zypper:
+            name: nginx
+            state: present
+    
+    - name: Activate Nginx
+      service:
+             name: nginx 
+             state: started
+             enabled: true
+
+    - name: Install MySQL
+      zypper:
+            name: mysql
+            state: present
+
+    - name: Activate mysql
+      service:
+             name: mysql
+             state: started
+             enabled: true
+
+    - name: Install python-pip
+      zypper:
+            name: python-pip
+            state: present
+
+    - name: Install python virtual environment
+      shell: |
+           pip install virtualenv
+           virtualenv name-env
+           pip install django
+            
+
