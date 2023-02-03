@@ -1,0 +1,41 @@
+---
+- name: Deploy webserver on SUSE
+  hosts: dev
+  become: yes
+
+  tasks:
+    - name: Install Apache
+      zypper:
+        name: apache2
+        state: present
+
+    - name: Start and enable Apache
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Install firewall package
+      zypper:
+        name: SuSEfirewall2
+        state: present
+
+    - name: Enable firewall
+      service:
+        name: SuSEfirewall2
+        state: started
+        enabled: yes
+
+    - name: Create simple test webpage
+      copy:
+        content: |
+          <html>
+            <head>
+              <title>My Web Server</title>
+            </head>
+            <body>
+              <h1>Welcome to My Web Server!</h1>
+            </body>
+          </html>
+        dest: /var/www/html/index.html
+

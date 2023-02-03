@@ -1,0 +1,33 @@
+---
+- hosts: dev
+  become: true
+  become_user: root
+  tasks:
+    - name: Install latest httpd
+      zypper:
+          name: httpd
+          state: latest
+
+    - name: Start and enable httpd
+      service:
+          name: httpd
+          state: started
+          enabled: true
+
+    - name: Install latest firewalld
+      zypper:
+          name: 'firewalld==0.9.1'
+          state: present
+
+    - name: Start and enable firewalld
+      service:
+          name: firewalld
+          state: started
+          enabled: true
+
+    - name: Allow httpd on firewalld
+      firewalld:
+          service: http
+          permanent: true
+          state: enabled
+          immediate: yes
