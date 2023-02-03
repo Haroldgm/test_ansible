@@ -1,0 +1,8 @@
+#to initiate dry run
+ansible-playbook -C playbook.yaml
+
+#to check the syntax
+ansible-playbook --syntax-check playbook.yaml
+
+#to initiate step by step task run
+ansible-playbook --step playbook.yaml

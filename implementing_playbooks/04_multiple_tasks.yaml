@@ -35,5 +35,8 @@
            pip install virtualenv
            virtualenv name-env
            pip install django
-            
 
+    - name: Copy a file from controller to remote
+      copy:
+          src: /tmp/file_from_root.txt
+          dest: /tmp/file_from_root.txt
