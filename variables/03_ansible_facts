@@ -1,0 +1,2 @@
+ansible -m setup dev
+ansible -m setup -a "filter=ansible_virtualization_type" dev # used to filter the results per host
