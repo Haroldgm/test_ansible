@@ -1,0 +1,15 @@
+#The entries below is an example for the /etc/ansible/hosts configuration file
+[server1]
+Client1 ansible_user=jack #this is a host variable and it always supersedes the group variable. In this instance, the user will always be jack. However, when ansible_user is defined in playbook, it supersedes the configuration file. That is playbook > host variable > group variable
+Client2
+
+[server2]
+Client3
+Client4
+
+[servers:children]
+server1
+server2
+
+[servers:vars]
+ansible_user=joe # this is a group variable. It applies to all the hosts in the list of servers

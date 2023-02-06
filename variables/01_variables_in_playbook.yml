@@ -5,6 +5,8 @@
   vars:
     web_pkg: nginx
     database_pkg: mysql
+    remote_dir: /tmp/facts.d
+    facts_file: /tmp/custom.fact
   tasks:
     - name: Install Nginx and Mysql
       zypper:
@@ -38,3 +40,14 @@
       copy:
           src: /tmp/file_from_root.txt
           dest: /tmp/file_from_root.txt
+
+    - name: Create a directory in the remote servers
+      file:
+          state: directory
+          recurse: yes
+          path: "{{ remote_dir }}"
+
+    - name: Copy a file from controller to remote ( vars)
+      copy:
+          src: "{{ facts_file }}"
+          dest: "{{ remote_dir }}"
