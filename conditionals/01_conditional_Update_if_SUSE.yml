@@ -1,0 +1,12 @@
+---
+- hosts: dev
+  become: true
+  become_user: root
+  tasks:
+    - name: Restart Remote1 SLES system
+      command: shutdown -r
+      when: ansible_os_family == "Suse" and  ansible_hostname == "Remote1"
+    # Alternatively, you can use this multiline AND condition
+    # when:
+    #   - ansible_os_family == "Suse"
+    #   - ansible_hostname == "Remote1"
