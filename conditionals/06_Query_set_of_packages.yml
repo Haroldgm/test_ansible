@@ -1,0 +1,24 @@
+- name: Check packages
+  hosts: all
+  become: true
+  become_user: root
+  vars:
+    package_list: ['xterm', 'openssl-1_1', 'xorg-x11-server']
+  tasks:
+    - name: Check if package is installed on the system
+      zypper:
+        name: "{{ item }}"
+      loop: "{{ package_list }}"
+      register: package_status
+
+    - name: Print package status
+      debug:
+        msg: "Package {{ item.item }} is installed"
+      loop: "{{ package_status.results }}"
+      when: item.rc == 0
+
+    - name: Print package status
+      debug:
+        msg: "Package {{ item.item }} is not installed"
+      loop: "{{ package_status.results }}"
+      when: item.rc == 1

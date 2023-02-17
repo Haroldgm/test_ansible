@@ -1,0 +1,41 @@
+- name: Install specific package versions
+  hosts: dev
+  become: true
+  become_user: root
+  tasks:
+    - name: Check OS Family
+      debug:
+        var: ansible_os_family
+
+    - name: Check if package is installed and at correct version
+      when: ansible_os_family == "Suse"
+      command: rpm -q {{ item.name }}-{{ item.version }}
+      register: pkg_check
+      loop:
+        - { name: apache2, version: "2.4.48" }
+        - { name: mysql, version: "5.7.35" }
+        - { name: php7, version: "7.4.27" }
+
+    - name: Install specific package versions
+      when: ansible_os_family == "Suse" and pkg_check is failed
+      zypper:
+        name: "{{ item.name }}-{{ item.version }}"
+        state: present
+      loop: "{{ pkg_check.results | rejectattr('rc', '==', 0) | map(attribute='item') | list }}"
+
+    - name: Check if package is installed and at correct version
+      when: ansible_os_family == "RedHat"
+      command: rpm -q {{ item.name }}-{{ item.version }}
+      register: pkg_check
+      loop:
+        - { name: httpd, version: "2.4.46" }
+        - { name: mariadb, version: "10.5.12" }
+        - { name: php, version: "7.4.27" }
+
+    - name: Install specific package versions
+      when: ansible_os_family == "RedHat" and pkg_check is failed
+      yum:
+        name: "{{ item.name }}-{{ item.version }}"
+        state: present
+      loop: "{{ pkg_check.results | rejectattr('rc', '==', 0) | map(attribute='item') | list }}"
+

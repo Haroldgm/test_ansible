@@ -1,0 +1,16 @@
+---
+- hosts: dev
+  become: true
+  become_user: root
+  tasks:
+    - name: Loop variable
+      debug:
+        msg: "{{ item }} from {{ ansible_hostname }}"
+
+      with_items:
+        - "hello1"
+        - "hello2"
+        - "hello3"
+
+      when:
+        - ansible_hostname == "Remote1"

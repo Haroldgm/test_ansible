@@ -1,0 +1,29 @@
+- name: Install packages
+  hosts: dev
+  become: true
+  become_user: root
+  tasks:
+    - name: Check OS Family
+      debug:
+        var: ansible_os_family
+
+    - name: Install packages
+      when: ansible_os_family == "Suse"
+      zypper:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - apache2
+        - mysql
+        - php7
+
+    - name: Install packages
+      when: ansible_os_family == "RedHat"
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - httpd
+        - mariadb
+        - php
+
