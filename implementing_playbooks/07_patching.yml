@@ -51,4 +51,3 @@
     - name: Print server status
       debug:
         var: server_status.stdout_lines
-haroldgm@Controller:~/ansible/02_playbooks>
