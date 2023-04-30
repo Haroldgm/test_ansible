@@ -1,0 +1,7 @@
+ansible-playbooks playbook.yml all
+ansible-playbooks playbook.yml group
+ansible-playbooks playbook.yml group --syntax-check
+ansible-playbooks playbook.yml group -C
+ansible-playbooks playbook.yml group --step
+ansible-playbooks playbook.yml -i "inventory.txt" group
+ansible-playbooks playbook.yml -i "inventory.txt" -e "target_hosts=group1,group2,IP1,hostname1"
