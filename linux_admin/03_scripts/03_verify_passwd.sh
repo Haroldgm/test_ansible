@@ -12,6 +12,9 @@ if [ ! -f "$input_file" ]; then
   exit 1
 fi
 
+DATE=$(date +%c)
+echo "$DATE" | tee -a "$output_file"
+
 # Check if the output file exists, and create it if it doesn't
 if [ ! -f "$output_file" ]; then
   touch "$output_file"

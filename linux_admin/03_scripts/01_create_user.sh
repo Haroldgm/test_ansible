@@ -17,6 +17,9 @@ if [ ! -f "$output_file" ]; then
   touch "$output_file"
 fi
 
+DATE=$(date +%c)
+echo "$DATE" | tee -a "$output_file"
+
 # Loop through the lines of the input file
 while read line; do
   # Split the line into the user and password
