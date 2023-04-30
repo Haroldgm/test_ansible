@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: true
+  become_user: root
+  tasks:
+   - name: Copy the scripts to remote clients
+     copy:
+       src: ../03_scripts
+       dest: /tmp
+       owner: root
+       group: root
+       mode: 0777
+
+   - name: User creation
+     shell: |
+       cd /tmp/03_scripts/
+       ./01_create_user.sh
+     register: script_result
+     failed_when: script_result.rc != 0
+
+   - name: Display results of user creation 
+     debug:
+       var: script_result.stdout_lines
